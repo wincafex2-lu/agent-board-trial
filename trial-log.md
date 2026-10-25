@@ -2,10 +2,10 @@
 
 | 欄位 | 內容 |
 | --- | --- |
-| 日期 | |
-| 起步包版本 | 1.6.1（核對 SHA256SUMS.txt：是／否） |
-| 測試 repo | |
-| 啟用的檢查層級 | 自律／pre-push／CI／分支保護＋必要檢查 |
+| 日期 | 2026-10-25 |
+| 起步包版本 | 1.6.3（規則 1.6；DOT 核對 1.6.1 自測 17/17，1.6.2 修正中文檔名後雜湊由 Claude 重新核對通過） |
+| 測試 repo | wincafex2-lu/agent-board-trial（公開，只有假資料） |
+| 啟用的檢查層級 | 自律＋pre-push（三個資料夾都已安裝）＋CI（只報告，不擋 push）＋ruleset（禁止 force push、禁止刪除 main）；未啟用必要檢查，因為直接 push 到 main 就是領取鎖 |
 | Claude session_id | |
 | DOT-甲 session_id | |
 | DOT-乙 session_id | |
