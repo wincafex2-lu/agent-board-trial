@@ -83,6 +83,7 @@ def approval_doc(b, expiry="2099-01-01T00:00:00Z", version="v1", h=HASH):
             "對象與範圍": "測試 repo 內的 fake-publish.txt", "內容雜湊": h, "費用上限": "免費", "批准者": "泓",
             "記錄者": "泓", "批准來源": "自我測試 fixture，非真實批准", "有效期限": expiry, "狀態": "有效"}
     body = "# APR-001\n\n| 欄位 | 內容 |\n| --- | --- |\n" + "".join(f"| {k} | {v} |\n" for k, v in rows.items() if v is not None)
+    os.makedirs(os.path.join(b, "approvals"), exist_ok=True)
     open(os.path.join(b, "approvals", "APR-001.md"), "w", encoding="utf-8").write(body)
 
 def use_setup(b, who, claim, version="v1", h=HASH, **doc):
