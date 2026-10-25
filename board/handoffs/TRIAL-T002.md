@@ -68,3 +68,12 @@
 ### 下一步
 
 持有者 DOT-58708687：`change_acknowledged`（確認本退回事件、接受 rev 6）→ 用新的 run_id 追加 `run_started` → 修改後送審 v2。租約已重設為 2026-10-25T15:47:32Z。
+
+## v3 · 修正成果 v2 · session_id: DOT-58708687
+
+- 成果 commit：`1cf521d`。新增 `data/.gitattributes`，兩個資料檔設為 `text eol=lf`；資料內容與產生器均未變動。
+- 驗證前工作目錄乾淨，執行：`git -c core.autocrlf=true checkout-index --force -- data/realms.js data/realms.json`，從索引重新寫出兩檔。
+- `git ls-files --eol data/realms.js data/realms.json`：兩檔均為 `i/lf w/lf attr/text eol=lf`。
+- 執行 `node scripts/build-realms.js`，再執行 `git status --porcelain`：完全沒有輸出。再重跑一輪兩個指令：仍完全沒有輸出。
+- Node 檢查兩檔均不含 CR 位元組、資料共 12 筆、以 vm 執行產生檔後 window.REALMS 與 JSON 一致：通過。
+- 此次重新 checkout 僅重寫已提交的兩個資料檔，沒有使用 reset --hard 或刪除索引。
