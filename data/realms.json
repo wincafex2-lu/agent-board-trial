@@ -1,0 +1,16 @@
+{
+  "stages": [
+    {"realm": "煉氣", "layer": 1, "required": 100, "success_rate": 0.95},
+    {"realm": "煉氣", "layer": 2, "required": 200, "success_rate": 0.95},
+    {"realm": "煉氣", "layer": 3, "required": 300, "success_rate": 0.95},
+    {"realm": "煉氣", "layer": 4, "required": 400, "success_rate": 0.95},
+    {"realm": "煉氣", "layer": 5, "required": 500, "success_rate": 0.95},
+    {"realm": "煉氣", "layer": 6, "required": 600, "success_rate": 0.95},
+    {"realm": "煉氣", "layer": 7, "required": 700, "success_rate": 0.95},
+    {"realm": "煉氣", "layer": 8, "required": 800, "success_rate": 0.95},
+    {"realm": "煉氣", "layer": 9, "required": 900, "success_rate": 0.95},
+    {"realm": "築基", "layer": null, "required": 2000, "success_rate": 0.8},
+    {"realm": "金丹", "layer": null, "required": 8000, "success_rate": 0.6},
+    {"realm": "元嬰", "layer": null, "required": 30000, "success_rate": 0.4}
+  ]
+}
