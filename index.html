@@ -1,0 +1,95 @@
+<!doctype html>
+<!-- session_id: DOT-b2104360 -->
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>修仙境界計算器</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #243c37; background: #f3f4ed; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 48px 20px; }
+    main { max-width: 840px; margin: auto; }
+    .eyebrow { color: #59786a; font-size: .85rem; letter-spacing: .16em; }
+    h1 { font-family: serif; font-size: clamp(1.8rem, 5vw, 2.7rem); margin: 14px 0; }
+    .intro, .note { color: #586b63; line-height: 1.8; }
+    .card { background: #fffef9; border: 1px solid #d9dfd4; border-radius: 18px; padding: 28px; margin-top: 28px; }
+    h2 { font-size: 1.15rem; margin: 0 0 22px; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    label { display: block; font-weight: 600; margin-bottom: 9px; }
+    input, select, button { font: inherit; }
+    input, select { width: 100%; min-width: 0; padding: 12px; border: 1px solid #acbcb0; border-radius: 8px; background: white; color: #243c37; }
+    input:focus-visible, select:focus-visible, button:focus-visible { outline: 3px solid #c49138; outline-offset: 3px; }
+    button { padding: 13px 26px; border: 0; border-radius: 8px; background: #275e49; color: white; cursor: pointer; margin-top: 24px; }
+    button:hover { background: #1b4837; }
+    .note { font-size: .85rem; margin-bottom: 0; }
+    #error { color: #a02d22; line-height: 1.6; }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 0; }
+    dt { font-size: .9rem; color: #586b63; margin-bottom: 10px; }
+    dd { margin: 0; font-size: 1.65rem; font-weight: 650; overflow-wrap: anywhere; }
+    #result { border-top: 4px solid #587b52; }
+    [hidden] { display: none !important; }
+    footer { font-size: .8rem; color: #66776d; margin-top: 26px; }
+    @media (max-width: 560px) {
+      body { padding: 28px 16px; }
+      .card { padding: 22px; }
+      .fields, .metrics { grid-template-columns: 1fr; }
+      .metrics { gap: 22px; }
+      button { width: 100%; }
+    }
+  </style>
+  <script defer src="data/realms.js"></script>
+  <script defer src="calc.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">修行手札 · 境界推算</div>
+      <h1>離下一重境界，還有多久？</h1>
+      <p class="intro">填入你的修行進度，估算突破前還需累積的修為與時間。</p>
+    </header>
+    <form id="calculator" class="card" novalidate>
+      <h2>目前修行狀態</h2>
+      <div class="fields">
+        <div>
+          <label for="realm">目前境界</label>
+          <select id="realm" name="realm">
+            <option>煉氣</option><option>築基</option><option>金丹</option><option>元嬰</option>
+          </select>
+        </div>
+        <div id="layer-field">
+          <label for="layer">煉氣層數</label>
+          <select id="layer" name="layer">
+            <option value="1">第 1 層</option><option value="2">第 2 層</option><option value="3">第 3 層</option>
+            <option value="4">第 4 層</option><option value="5">第 5 層</option><option value="6">第 6 層</option>
+            <option value="7">第 7 層</option><option value="8">第 8 層</option><option value="9">第 9 層</option>
+          </select>
+        </div>
+        <div>
+          <label for="current">目前修為</label>
+          <input id="current" name="current" type="number" min="0" step="any" inputmode="decimal" value="0" required>
+        </div>
+        <div>
+          <label for="per-hour">每小時修為產量</label>
+          <input id="per-hour" name="perHour" type="number" min="0" step="any" inputmode="decimal" value="30" required>
+        </div>
+      </div>
+      <button type="submit">推算突破進度</button>
+      <p class="note">可輸入小數；產量為 0 且尚未達標時，時間顯示「無法估算」。</p>
+      <p id="error" role="alert" hidden></p>
+    </form>
+    <section id="result" class="card" aria-live="polite" aria-atomic="true" hidden>
+      <h2 id="result-title">突破進度</h2>
+      <dl class="metrics">
+        <div><dt>還差修為</dt><dd id="remaining"></dd></div>
+        <div><dt>預估掛機時間</dt><dd id="hours"></dd></div>
+        <div><dt>突破成功率</dt><dd id="success-rate"></dd></div>
+      </dl>
+      <p class="note">時間四捨五入至小數 1 位。修為達標不代表突破必定成功。</p>
+    </section>
+    <noscript><p>請啟用 JavaScript 以使用境界計算器。</p></noscript>
+    <footer>假資料試算 · 所有計算皆在本機完成 · 可離線使用</footer>
+  </main>
+</body>
+</html>
