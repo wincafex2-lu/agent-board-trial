@@ -59,7 +59,6 @@
 
 1. **規則沒寫到的情況**：持有者租約過期被標成失聯後，能不能自己恢復並續約？本次 T001 依第 7 條「原持有者回來」的精神自行恢復，並在事件寫明理由；Claude 同時是持有者和總設計師，建議在 RULES 寫清楚，或規定要由泓裁定。
 2. **泓的審查無法驗證身分**：泓的審查 commit `da07c4b` 是在共用的本機工作目錄、用 `泓 <hong@local.invalid>` 身分、沒有簽章（`%G? = N`）提交的，用的是另一個 Claude Code session 加入的 `tools/human_review.py`（`687f44f`，不屬於任何看板任務）。流程上可以，但 Git 無法分辨是泓本人還是代理執行。要讓它可信，需要第 8、9 條提到的簽章或 GitHub 帳號核准。
-3. **Windows 環境**：Git Bash 裡沒有 `node`（要用 `C:\Program Files
-odejs`）；主控台是 cp950，verify_board 的中文輸出會變亂碼，需設 `PYTHONIOENCODING=utf-8`；`core.autocrlf=true` 讓產生的檔案在重跑後顯示被修改（T002 的退回原因），新專案建議一開始就加 `.gitattributes`。
+3. **Windows 環境**：Git Bash 裡沒有 `node`（要用 `C:\Program Files\nodejs`）；主控台是 cp950，verify_board 的中文輸出會變亂碼，需設 `PYTHONIOENCODING=utf-8`；`core.autocrlf=true` 讓產生的檔案在重跑後顯示被修改（T002 的退回原因），新專案建議一開始就加 `.gitattributes`。
 4. **租約 30 分鐘太短**：等審查、等使用者下一步的空檔就讓 T001、T003 同時過期。若繼續由人逐步下指令，建議把租約拉長，或在 `turn_ended` 時自動續約。
 5. `tools/selftest_verify.py` 在本機執行時找不到暫存資料夾裡的 `approvals/APR-001.md` 而中止，尚未調查原因。
