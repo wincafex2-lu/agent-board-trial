@@ -4,4 +4,4 @@
 
 | ID | rev | parent | depends_on | 任務 | 負責主代理 | 持有 session | claim_id | 租約到期 | 審查者 | 狀態 | 成果版本 | 交接單 | 最後回報 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TRIAL-T001 | 1 | — | — | 修仙境界計算器（主任務，見 GOAL.md） | Claude | — | — | — | 泓 | 待領取 | — | handoffs/TRIAL-T001.md | 建立主任務 |
+| TRIAL-T001 | 2 | — | — | 修仙境界計算器（主任務，見 GOAL.md） | Claude | Claude-96dd1172 | Claude-96dd1172-c1 | 2026-10-25T15:28:48Z | 泓 | 已領取 | — | handoffs/TRIAL-T001.md | 領取主任務 |
