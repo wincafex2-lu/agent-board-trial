@@ -6,7 +6,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 EXAMPLE = os.path.join(HERE, "..", "examples", "game", "board")
 
 def run(board):
-    p = subprocess.run([sys.executable, os.path.join(HERE, "verify_board.py"), board], capture_output=True, text=True)
+    p = subprocess.run([sys.executable, os.path.join(HERE, "verify_board.py"), board], capture_output=True, text=True, encoding="utf-8",
+                       env=dict(os.environ, PYTHONIOENCODING="utf-8"))
     return p.returncode, p.stdout
 
 def add_event(board, **e):

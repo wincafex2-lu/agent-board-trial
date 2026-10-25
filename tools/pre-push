@@ -1,7 +1,16 @@
 #!/bin/sh
 # 複製到 .git/hooks/pre-push 並加上執行權限：chmod +x .git/hooks/pre-push
 # 公告欄檢查失敗時拒絕 push。注意：git push --no-verify 可以跳過，真正的強制要靠遠端分支保護。
-python3 tools/verify_board.py board || {
+# Windows 的 Git 也能執行這個檔案；會依序找 python3、python、py -3。
+PY=""
+for c in python3 python "py -3"; do
+  if $c -c "import sys" >/dev/null 2>&1; then PY="$c"; break; fi
+done
+if [ -z "$PY" ]; then
+  echo "找不到 Python，無法檢查公告欄，已拒絕 push。請先安裝 Python 3。"
+  exit 1
+fi
+PYTHONIOENCODING=utf-8 $PY tools/verify_board.py board || {
   echo "公告欄檢查失敗，已拒絕 push。請修正上面的錯誤，或把相關任務標為待核對。"
   exit 1
 }
