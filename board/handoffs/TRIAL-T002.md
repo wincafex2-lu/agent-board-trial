@@ -77,3 +77,18 @@
 - 執行 `node scripts/build-realms.js`，再執行 `git status --porcelain`：完全沒有輸出。再重跑一輪兩個指令：仍完全沒有輸出。
 - Node 檢查兩檔均不含 CR 位元組、資料共 12 筆、以 vm 執行產生檔後 window.REALMS 與 JSON 一致：通過。
 - 此次重新 checkout 僅重寫已提交的兩個資料檔，沒有使用 reset --hard 或刪除索引。
+
+## v4 · 2026-10-25T15:23:53Z · 審查 v2 通過 · 審查者 Claude-96dd1172
+
+審查對象：TRIAL-T002 成果 v2（commit `1cf521d`，相對 v1 只新增 `data/.gitattributes`）。審查者另開一份 `core.autocrlf=true` 的全新本機 clone，checkout `1cf521d` 後自行重跑：
+
+| 驗收項目 | 結果 | 驗證方式 |
+| --- | --- | --- |
+| 有效 JSON、12 筆、順序煉氣 1–9、築基、金丹、元嬰 | 通過 | Node v24.22.1 逐筆比對 |
+| 煉氣 100 × n；築基 2000、金丹 8000、元嬰 30000 | 通過 | 同上 |
+| 成功率 0.95／0.80／0.60／0.40 | 通過 | 同上 |
+| realms.js 內容和 realms.json 一致 | 通過 | `vm` 執行 realms.js，比對 `window.REALMS` |
+| 重跑產生器後沒有變化 | 通過 | `git ls-files --eol`：兩個資料檔 `w/lf attr/text eol=lf`；連跑兩次 `node scripts/build-realms.js`，`git status --porcelain` 都沒有輸出 |
+| 沒有 package.json 依賴、沒有 node_modules/ | 通過 | 兩者都不存在 |
+
+被接受的成果版本：**v2（1cf521d）**。下游 TRIAL-T003、TRIAL-T004 以此版本為輸入。
