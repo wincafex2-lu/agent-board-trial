@@ -21,7 +21,8 @@
       throw new Error('境界數值資料不完整或不合法');
     }
     const remaining = Math.max(0, stage.required - current);
-    const hours = remaining === 0 ? 0 : perHour === 0 ? null : Number((remaining / perHour).toFixed(1));
+    // session_id: DOT-b2104360 — scale before dividing to round half-tenths correctly.
+    const hours = remaining === 0 ? 0 : perHour === 0 ? null : Math.round(remaining * 10 / perHour) / 10;
     return {
       remaining,
       hours,

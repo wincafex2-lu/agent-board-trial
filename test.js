@@ -34,6 +34,9 @@ test('小數四捨五入', () => {
   assert.equal(computeProgress(stages, '煉氣', 1, 0, 80).hours, 1.3);
   assert.equal(computeProgress(stages, '煉氣', 1, 0, 30).hours, 3.3);
 });
+// session_id: DOT-b2104360 — regression cases from the v1 review.
+test('0.35 小時四捨五入為 0.4', () => assert.equal(computeProgress(stages, '煉氣', 1, 93, 20).hours, 0.4));
+test('0.15 小時四捨五入為 0.2', () => assert.equal(computeProgress(stages, '煉氣', 1, 97, 20).hours, 0.2));
 test('接受小數修為與產量', () => assert.equal(computeProgress(stages, '煉氣', 1, 99.5, 0.25).hours, 2));
 const chineseError = error => error instanceof Error && /[\u3400-\u9fff]/u.test(error.message);
 for (const realm of ['未知', '', null, 1]) test(`拒絕境界 ${realm}`, () => assert.throws(() => computeProgress(stages, realm, null, 0, 1), chineseError));
