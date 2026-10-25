@@ -1,0 +1,7 @@
+#!/bin/sh
+# 複製到 .git/hooks/pre-push 並加上執行權限：chmod +x .git/hooks/pre-push
+# 公告欄檢查失敗時拒絕 push。注意：git push --no-verify 可以跳過，真正的強制要靠遠端分支保護。
+python3 tools/verify_board.py board || {
+  echo "公告欄檢查失敗，已拒絕 push。請修正上面的錯誤，或把相關任務標為待核對。"
+  exit 1
+}

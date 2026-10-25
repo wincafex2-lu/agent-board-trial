@@ -1,0 +1,12 @@
+# 複製到 .github/workflows/verify-board.yml
+name: verify-board
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/verify_board.py board
